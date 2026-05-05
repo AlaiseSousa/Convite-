@@ -1,0 +1,429 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Envelope */
+.envelope {
+    width: 520px;
+    height: 300px;
+    background: #6b8c5c;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Tampa TRIANGULAR */
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: #5a7a4a;
+    transform-origin: top;
+    transition: transform 0.5s ease;
+    z-index: 10;
+    clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+}
+
+/* Corpo */
+.envelope-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: #6b8c5c;
+}
+
+.envelope-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(0,0,0,0.08);
+}
+
+/* Selo */
+.seal {
+    position: absolute;
+    bottom: 20px;
+    right: 25px;
+    width: 36px;
+    height: 36px;
+    background: #8b3a3a;
+    border-radius: 50%;
+    z-index: 5;
+    border: 2px solid rgba(255,255,255,0.3);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Botão */
+.open-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    color: #5a7a4a;
+    border: 1px solid #c0c0c0;
+    padding: 8px 40px;
+    font-size: 15px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    z-index: 15;
+    transition: all 0.3s ease;
+}
+
+.open-btn:hover {
+    background: #f5f0e8;
+    color: #3a5c35;
+}
+
+.open-btn.hide {
+    display: none;
+}
+
+/* Cartão */
+.invitation-card {
+    position: absolute;
+    top: 50%;                    /* posiciona no meio */
+    left: 50%;
+    transform: translate(-50%, -50%);  /* centraliza perfeitamente */
+    width: 470px;
+    background: white;
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: all 0.5s ease;
+}
+
+.invitation-card.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%);  /* mantém centralizado */
+}
+
+.envelope.flap-open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 5;
+}
+
+/* Conteúdo */
+.invitation-content {
+    padding: 50px 35px 25px 35px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+/* Label com logos afastados */
+.invitation-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+    padding: 0 10px;
+    margin-top: 15px;  /* ← adicione esta linha */
+}
+
+/* Centro do label com linhas decorativas */
+.label-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.label-center span h2 {
+    font-size: 14px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: black;
+    margin: 0;
+}
+
+.label-line {
+    width: 90px;
+    height: 1px;
+    background: #d4c5a5;
+}
+
+/* LOGOS */
+.logo-img {
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+}
+
+.logo1-img {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Título */
+.main-title {
+    font-size: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+}
+
+/* Texto do convite */
+.couple-names {
+    font-size: 15px;
+    color: #3a5c35;
+    margin: 15px 0;
+    font-style: normal;
+    line-height: 1.8;
+    padding: 0 10px;
+}
+
+.divider {
+    width: 50px;
+    height: 1px;
+    background: #d4c5a5;
+    margin: 18px auto;
+}
+
+/* Venue */
+.venue {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8b7a6a;
+    margin: 20px 0 8px;
+    font-weight: 500;
+}
+
+/* Data */
+.date {
+    font-size: 15px;
+    color: #6b4c3a;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+/* Botão fechar */
+.close-btn {
+    background: transparent;
+    border: 1px solid #d9c08b;
+    padding: 8px 28px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8b8b8b;
+    cursor: pointer;
+    margin: 15px auto 0 auto;
+    transition: all 0.3s ease;
+    width: fit-content;
+}
+
+.close-btn:hover {
+    background: #f5f0e8;
+    color: #5a4a3a;
+}
+
+/* ============ ÁREA DE RODAPÉ (ASSINATURA + FINANCIAMENTO) ============ */
+.footer-area {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #e8e0d0;
+}
+
+/* Linha da assinatura */
+.signature-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.pen-icon {
+    font-size: 18px;
+    display: inline-block;
+    animation: write 1.5s ease-in-out infinite;
+}
+
+.signature-name {
+    font-size: 16px;
+    color: #3a5c35;
+    letter-spacing: 1px;
+    border-bottom: 1px dashed #d4c5a5;
+    padding-bottom: 3px;
+    font-weight: 500;
+}
+
+@keyframes write {
+    0%, 100% {
+        transform: rotate(-10deg);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+}
+
+/* Footer do financiamento */
+.financing-footer {
+    text-align: center;
+    padding: 10px 0 5px 0;
+}
+
+.financing-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.financiamento {
+    height: 35px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.85;
+}
+
+.financing-text {
+    font-size: 9px;
+    color: #999;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.financing-text span {
+    display: inline-block;
+    position: relative;
+}
+
+.financing-text span::before,
+.financing-text span::after {
+    content: "—";
+    color: #d4c5a5;
+    padding: 0 8px;
+    font-size: 10px;
+}
+
+/* Responsivo */
+@media (max-width: 580px) {
+    .envelope {
+        width: 420px;
+        height: 260px;
+    }
+
+    .invitation-card {
+        width: 380px;
+    }
+
+    .invitation-card.open {
+        transform: translateX(-50%) translateY(60px);
+    }
+
+    .couple-names {
+        font-size: 14px;
+    }
+
+    .logo-img {
+        height: 45px;
+    }
+
+    .logo1-img {
+        height: 65px;
+    }
+    
+    .financiamento {
+        height: 28px;
+    }
+    
+    .signature-name {
+        font-size: 14px;
+    }
+    
+    .pen-icon {
+        font-size: 16px;
+    }
+    
+    .financing-text {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 450px) {
+    .envelope {
+        width: 350px;
+        height: 220px;
+    }
+
+    .invitation-card {
+        width: 315px;
+    }
+
+    .invitation-card.open {
+        transform: translateX(-50%) translateY(45px);
+    }
+
+    .couple-names {
+        font-size: 13px;
+    }
+
+    .open-btn {
+        padding: 6px 30px;
+        font-size: 13px;
+    }
+
+    .logo-img {
+        height: 38px;
+    }
+
+    .logo1-img {
+        height: 55px;
+    }
+    
+    .financiamento {
+        height: 22px;
+    }
+    
+    .signature-name {
+        font-size: 12px;
+    }
+    
+    .pen-icon {
+        font-size: 14px;
+    }
+    
+    .financing-text {
+        font-size: 7px;
+    }
+    
+    .financing-text span::before,
+    .financing-text span::after {
+        padding: 0 5px;
+    }
+}
